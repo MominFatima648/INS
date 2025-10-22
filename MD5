@@ -1,0 +1,10 @@
+import hashlib
+
+result = hashlib.md5(b'fatima')
+result1 = hashlib.md5(b'momin')
+
+print("The byte equivalent of hash is: ", end="")
+print(result.digest())
+
+print("The byte equivalent of hash is: ", end="")
+print(result1.digest())
