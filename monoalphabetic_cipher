@@ -1,0 +1,50 @@
+
+
+import string
+import random
+
+ALPHABET = string.ascii_uppercase
+
+def generate_key():
+    """Generate a random substitution key (permutation of alphabet)."""
+    letters = list(ALPHABET)
+    random.shuffle(letters)
+    return "".join(letters)
+
+def encrypt(plaintext, key):
+    """Encrypt the plaintext using the given key."""
+    mapping = {p: c for p, c in zip(ALPHABET, key)}
+    plaintext = plaintext.upper()
+    ciphertext = ""
+
+    for ch in plaintext:
+        if ch in mapping:
+            ciphertext += mapping[ch]
+        else:
+            ciphertext += ch  
+    return ciphertext
+
+def decrypt(ciphertext, key):
+    """Decrypt the ciphertext using the given key."""
+    reverse_mapping = {c: p for p, c in zip(ALPHABET, key)}
+    plaintext = ""
+
+    for ch in ciphertext:
+        if ch in reverse_mapping:
+            plaintext += reverse_mapping[ch]
+        else:
+            plaintext += ch
+    return plaintext
+
+if __name__ == "__main__":
+    key = generate_key()
+    print("Generated Key:", key)
+
+    text = "HELLO"
+    print("Plaintext:", text)
+
+    cipher = encrypt(text, key)
+    print("Ciphertext:", cipher)
+
+    decrypted = decrypt(cipher, key)
+    print("Decrypted:", decrypted)
